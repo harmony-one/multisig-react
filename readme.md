@@ -28,7 +28,7 @@ Install dependencies for the project:
 yarn install
 ```
 
-For using the Rinkeby services:
+For using the Testnet services:
 
 ```
 yarn start
@@ -42,7 +42,7 @@ yarn start-mainnet
 
 ### Building
 
-For Rinkeby:
+For Testnet:
 
 ```
 yarn build
