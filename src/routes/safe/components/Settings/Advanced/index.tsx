@@ -10,7 +10,6 @@ import ModulesTable from './ModulesTable'
 
 import Block from 'src/components/layout/Block'
 import { safeModulesSelector, safeNonceSelector } from 'src/logic/safe/store/selectors'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 
 const useStyles = makeStyles(styles)
 
@@ -43,11 +42,6 @@ const Advanced = (): React.ReactElement => {
   const nonce = useSelector(safeNonceSelector)
   const modules = useSelector(safeModulesSelector)
   const moduleData = modules ? getModuleData(modules) ?? null : null
-  const { trackEvent } = useAnalytics()
-
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Settings', label: 'Advanced' })
-  }, [trackEvent])
 
   return (
     <>

@@ -16,13 +16,23 @@ import { SPENDING_LIMIT_MODULE_ADDRESS } from 'src/utils/constants'
 import SpendingLimitModule from './artifacts/AllowanceModule.json'
 
 export const SENTINEL_ADDRESS = '0x0000000000000000000000000000000000000001'
-export const MULTI_SEND_ADDRESS = '0x3F1ACAB5e271811C3Af1b0f06512e022FCCE2AF0'
-export const SAFE_MASTER_COPY_ADDRESS = '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07'
-export const DEFAULT_FALLBACK_HANDLER_ADDRESS = '0x2426e7ab9Cd2A82F0c7124e0dcBc2a7EAA963917'
-export const SAFE_MASTER_COPY_ADDRESS_V10 = '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07'
+export const MULTI_SEND_ADDRESS = '0x48CCD0B217C3F7f48Cd0DCe8290c3fD782a315a8'
+export const SAFE_MASTER_COPY_ADDRESS = '0x79Ac6E23E3d12554aBAbA5Aac70F525d383bBaE7'
+export const DEFAULT_FALLBACK_HANDLER_ADDRESS = '0x2835e652b0d8697B508E237BE3BEF79FDbCDc682'
+export const SAFE_MASTER_COPY_ADDRESS_V10 = '0x79Ac6E23E3d12554aBAbA5Aac70F525d383bBaE7'
 
 let proxyFactoryMaster: GnosisSafeProxyFactory
 let safeMaster: GnosisSafe
+
+const GnosisSafeSolAddress = {
+  1666600000: '0x79Ac6E23E3d12554aBAbA5Aac70F525d383bBaE7',
+  1666700000: '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07',
+}
+
+const GnosisSafeProxyFactoryAddress = {
+  1666600000: '0x47e4ae48490D47b834f9DBc4dc1d87eCd7373EB1',
+  1666700000: '0x3793b20768821E29AE568299708aF41136Bac317',
+}
 
 /**
  * Creates a Contract instance of the GnosisSafe contract
@@ -34,7 +44,7 @@ export const getGnosisSafeContract = (web3: Web3, networkId: HARMONY_NETWORK) =>
   // TODO: this may not be the most scalable approach,
   //  but up until v1.2.0 the address is the same for all the networks.
   //  So, if we can't find the network in the Contract artifact, we fallback to MAINNET.
-  const contractAddress = '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07'
+  const contractAddress = GnosisSafeSolAddress[networkId]
   return (new web3.eth.Contract(GnosisSafeSol.abi as AbiItem[], contractAddress) as unknown) as GnosisSafe
 }
 
@@ -48,7 +58,7 @@ const getProxyFactoryContract = (web3: Web3, networkId: HARMONY_NETWORK): Gnosis
   // TODO: this may not be the most scalable approach,
   //  but up until v1.2.0 the address is the same for all the networks.
   //  So, if we can't find the network in the Contract artifact, we fallback to MAINNET.
-  const contractAddress = '0x3793b20768821E29AE568299708aF41136Bac317'
+  const contractAddress = GnosisSafeProxyFactoryAddress[networkId]
   return (new web3.eth.Contract(ProxyFactorySol.abi as AbiItem[], contractAddress) as unknown) as GnosisSafeProxyFactory
 }
 

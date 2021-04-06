@@ -16,111 +16,6 @@ const removeLastTrailingSlash = (url) => {
   return url
 }
 
-export type StaticAppInfo = {
-  url: string
-  disabled: boolean
-  networks: number[]
-}
-export const staticAppsList: Array<StaticAppInfo> = [
-  // 1inch
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmRWtuktjfU6WMAEJFgzBC4cUfqp3FF5uN9QoWb55SdGG5`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-  // Aave
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmQ3w2ezp2zx3u2LYQHyuNzMrLDJFjyL1rjAFTjNMcQ4cK`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-  //Balancer Exchange
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmfPLXne1UrY399RQAcjD1dmBhQrPGZWgp311CDLLW3VTn`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-  // Balancer Pool
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmaTucdZYLKTqaewwJduVMM8qfCDhyaEqjd8tBNae26K1J`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-  // CMM
-  // Point to a static server to allow app update without Safe deployment
-  {
-    url: `https://safe-cmm.gnosis.io`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.RINKEBY, HARMONY_NETWORK.XDAI],
-  },
-  // Idle
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmZ3oug89a3BaVqdJrJEA8CKmLF4M8snuAnphR6z1yq8V8`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET, HARMONY_NETWORK.TESTNET],
-  },
-  // request
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmTBBaiDQyGa17DJ7DdviyHbc51fTVgf6Z5PW5w2YUTkgR`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-  // Sablier
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/Qmb1Xpfu9mnX4A3trpoVeBZ9sTiNtEuRoFKEiaVXWntDxB`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET, HARMONY_NETWORK.RINKEBY],
-  },
-  // Synthetix
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmXLxxczMH4MBEYDeeN9zoiHDzVkeBmB5rBjA3UniPEFcA`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET, HARMONY_NETWORK.RINKEBY],
-  },
-  // OpenZeppelin
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmQovvfYYMUXjZfNbysQDUEXR8nr55iJRwcYgJQGJR7KEA`,
-    disabled: false,
-    networks: [
-      HARMONY_NETWORK.MAINNET,
-      HARMONY_NETWORK.RINKEBY,
-      //HARMONY_NETWORK.ENERGY_WEB_CHAIN,
-      //HARMONY_NETWORK.VOLTA,
-      // HARMONY_NETWORK.XDAI,
-    ],
-  },
-  // TX-Builder
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmYES1Se6i6679z3PfQ62bydgVVEoSRUabvjB35DfUGPGA`,
-    disabled: false,
-    networks: [
-      HARMONY_NETWORK.MAINNET,
-      HARMONY_NETWORK.RINKEBY,
-      HARMONY_NETWORK.ENERGY_WEB_CHAIN,
-      HARMONY_NETWORK.VOLTA,
-      HARMONY_NETWORK.XDAI,
-    ],
-  },
-  // Wallet-Connect
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/QmWwSuByB3B3hLU5ita3RQgiSEDYtBr5LjjDCRGb8YqLKF`,
-    disabled: false,
-    networks: [
-      HARMONY_NETWORK.MAINNET,
-      HARMONY_NETWORK.RINKEBY,
-      HARMONY_NETWORK.ENERGY_WEB_CHAIN,
-      HARMONY_NETWORK.VOLTA,
-      HARMONY_NETWORK.XDAI,
-    ],
-  },
-  // Yearn Vaults
-  {
-    url: `${process.env.REACT_APP_IPFS_GATEWAY}/Qme9HuPPhgCtgfj1CktvaDKhTesMueGCV2Kui1Sqna3Xs9`,
-    disabled: false,
-    networks: [HARMONY_NETWORK.MAINNET],
-  },
-]
-
 export const getAppInfoFromOrigin = (origin: string): { url: string; name: string } | null => {
   try {
     return JSON.parse(origin)
@@ -204,20 +99,6 @@ export const getAppInfoFromUrl = memoize(
     } catch (error) {
       console.error(`It was not possible to fetch app from ${res.url}: ${error.message}`)
       return res
-    }
-  },
-)
-
-export const getIpfsLinkFromEns = memoize(
-  async (name: string): Promise<string | undefined> => {
-    try {
-      const content = await getContentFromENS(name)
-      if (content && content.protocolType === 'ipfs') {
-        return `${process.env.REACT_APP_IPFS_GATEWAY}/${content.decoded}/`
-      }
-    } catch (error) {
-      console.error(error)
-      return
     }
   },
 )

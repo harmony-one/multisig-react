@@ -29,7 +29,6 @@ import Img from 'src/components/layout/Img'
 import Paragraph from 'src/components/layout/Paragraph/index'
 import Row from 'src/components/layout/Row'
 import { getOwnersWithNameFromAddressBook } from 'src/logic/addressBook/utils'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 import { AddressBookState } from 'src/logic/addressBook/model/addressBook'
 import { SafeOwner } from 'src/logic/safe/store/models/safe'
 
@@ -48,7 +47,6 @@ type Props = {
 }
 
 const ManageOwners = ({ addressBook, granted, owners }: Props): React.ReactElement => {
-  const { trackEvent } = useAnalytics()
   const classes = useStyles()
 
   const [selectedOwnerAddress, setSelectedOwnerAddress] = useState('')
@@ -78,10 +76,6 @@ const ManageOwners = ({ addressBook, granted, owners }: Props): React.ReactEleme
     setSelectedOwnerName('')
   }
 
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Settings', label: 'Owners' })
-  }, [trackEvent])
-
   const columns = generateColumns()
   const autoColumns = columns.filter((c) => !c.custom)
   const ownersWithAddressBookName = getOwnersWithNameFromAddressBook(addressBook, owners)
@@ -95,7 +89,7 @@ const ManageOwners = ({ addressBook, granted, owners }: Props): React.ReactEleme
         </Heading>
         <Paragraph className={classes.annotation}>
           Add, remove and replace owners or rename existing owners. Owner names are only stored locally and never shared
-          with Gnosis or any third parties.
+          with Harmony One or any third parties.
         </Paragraph>
         <TableContainer>
           <Table

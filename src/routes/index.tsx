@@ -6,7 +6,6 @@ import { LOAD_ADDRESS, OPEN_ADDRESS, SAFELIST_ADDRESS, SAFE_PARAM_ADDRESS, WELCO
 
 import Loader from 'src/components/Loader'
 import { defaultSafeSelector } from 'src/logic/safe/store/selectors'
-import { useAnalytics } from 'src/utils/googleAnalytics'
 import { DEFAULT_SAFE_INITIAL_STATE } from 'src/logic/safe/store/reducer/safe'
 
 const Welcome = lazy(() => import('./welcome/container'))
@@ -27,7 +26,6 @@ const Routes = (): React.ReactElement => {
   })
 
   const defaultSafe = useSelector(defaultSafeSelector)
-  const { trackPage } = useAnalytics()
 
   useEffect(() => {
     if (isInitialLoad && location.pathname !== '/') {
@@ -42,12 +40,10 @@ const Routes = (): React.ReactElement => {
       if (matchSafeWithAction.params?.safeAction) {
         safePage += `/${matchSafeWithAction.params?.safeAction}`
       }
-      trackPage(safePage)
     } else {
       const page = `${location.pathname}${location.search}`
-      trackPage(page)
     }
-  }, [location, matchSafeWithAction, trackPage])
+  }, [location, matchSafeWithAction])
 
   return (
     <Suspense fallback={null}>

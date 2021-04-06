@@ -30,7 +30,7 @@ import {
   safeNeedsUpdateSelector,
   safeParamAddressFromStateSelector,
 } from 'src/logic/safe/store/selectors'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
+
 import { fetchMasterCopies, MasterCopy, MasterCopyDeployer } from 'src/logic/contracts/api/masterCopies'
 import { getMasterCopyAddressFromProxyAddress } from 'src/logic/contracts/safeContracts'
 
@@ -48,7 +48,6 @@ const SafeDetails = (): React.ReactElement => {
   const safeName = useSelector(safeNameSelector)
   const safeNeedsUpdate = useSelector(safeNeedsUpdateSelector)
   const safeCurrentVersion = useSelector(safeCurrentVersionSelector)
-  const { trackEvent } = useAnalytics()
 
   const [isModalOpen, setModalOpen] = React.useState(false)
   const safeAddress = useSelector(safeParamAddressFromStateSelector)
@@ -86,10 +85,6 @@ const SafeDetails = (): React.ReactElement => {
       ? ` (there's a newer version: ${latestMasterContractVersion})`
       : ''
   }
-
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Settings', label: 'Details' })
-  }, [trackEvent])
 
   useEffect(() => {
     const getMasterCopyInfo = async () => {

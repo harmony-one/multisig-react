@@ -21,7 +21,6 @@ import Block from 'src/components/layout/Block'
 import Row from 'src/components/layout/Row'
 import { safeCancellationTransactionsSelector } from 'src/logic/safe/store/selectors'
 import { extendedTransactionsSelector } from 'src/logic/safe/store/selectors/transactions'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 
 export const TRANSACTION_ROW_TEST_ID = 'transaction-row'
 
@@ -32,11 +31,6 @@ const TxsTable = (): React.ReactElement => {
   const [expandedTx, setExpandedTx] = useState(null)
   const cancellationTransactions = useSelector(safeCancellationTransactionsSelector)
   const transactions = useSelector(extendedTransactionsSelector)
-  const { trackEvent } = useAnalytics()
-
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Transactions' })
-  }, [trackEvent])
 
   const handleTxExpand = (rowId) => {
     setExpandedTx((prevRowId) => (prevRowId === rowId ? null : rowId))

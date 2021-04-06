@@ -30,7 +30,6 @@ import {
   BalanceData,
 } from 'src/routes/safe/components/Balances/dataFetcher'
 import { extendedSafeTokensSelector, grantedSelector } from 'src/routes/safe/container/selector'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 import { makeStyles } from '@material-ui/core/styles'
 import { styles } from './styles'
 
@@ -73,11 +72,6 @@ const Coins = (props: Props): React.ReactElement => {
   const activeTokens = useSelector(extendedSafeTokensSelector)
   const currencyValues = useSelector(safeFiatBalancesListSelector)
   const granted = useSelector(grantedSelector)
-  const { trackEvent } = useAnalytics()
-
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Coins' })
-  }, [trackEvent])
 
   const filteredData: List<BalanceData> = useMemo(
     () => getBalanceData(activeTokens, selectedCurrency, currencyValues, currencyRate),
