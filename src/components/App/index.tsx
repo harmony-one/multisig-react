@@ -12,7 +12,7 @@ import InfoIcon from 'src/assets/icons/info.svg'
 
 import AppLayout from 'src/components/AppLayout'
 import { SafeListSidebar, SafeListSidebarContext } from 'src/components/SafeListSidebar'
-import CookiesBanner from 'src/components/CookiesBanner'
+
 import Notifier from 'src/components/Notifier'
 import Backdrop from 'src/components/layout/Backdrop'
 import Img from 'src/components/layout/Img'
@@ -153,7 +153,6 @@ const App: React.FC = ({ children }) => {
           )}
         </>
       </SnackbarProvider>
-      <CookiesBanner />
     </Frame>
   )
 }

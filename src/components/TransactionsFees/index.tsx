@@ -35,8 +35,7 @@ export const TransactionFees = ({
     transactionAction = 'approve'
   }
 
-  // FIXME this should be removed when estimating with WalletConnect correctly
-  if (!providerName || sameString(providerName, WALLETS.WALLET_CONNECT)) {
+  if (!providerName) {
     return null
   }
 

@@ -21,7 +21,6 @@ import {
   safeParamAddressFromStateSelector,
   safeThresholdSelector,
 } from 'src/logic/safe/store/selectors'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 
 const useStyles = makeStyles(styles)
 
@@ -52,12 +51,6 @@ const ThresholdSettings = (): React.ReactElement => {
       }),
     )
   }
-
-  const { trackEvent } = useAnalytics()
-
-  useEffect(() => {
-    trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Settings', label: 'Owners' })
-  }, [trackEvent])
 
   return (
     <>

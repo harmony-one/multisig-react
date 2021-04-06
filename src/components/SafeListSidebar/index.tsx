@@ -15,7 +15,6 @@ import Hairline from 'src/components/layout/Hairline'
 import Link from 'src/components/layout/Link'
 import Row from 'src/components/layout/Row'
 import { WELCOME_ADDRESS } from 'src/routes/routes'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 
 import { defaultSafeSelector, safeParamAddressFromStateSelector } from 'src/logic/safe/store/selectors'
 
@@ -44,7 +43,6 @@ export const SafeListSidebar = ({ children }: Props): ReactElement => {
   const currentSafe = useSelector(safeParamAddressFromStateSelector)
 
   const classes = useSidebarStyles()
-  const { trackEvent } = useAnalytics()
 
   const searchClasses = {
     input: classes.searchInput,
@@ -54,9 +52,6 @@ export const SafeListSidebar = ({ children }: Props): ReactElement => {
   }
 
   const toggleSidebar = () => {
-    if (!isOpen) {
-      trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Safe List Sidebar' })
-    }
     setIsOpen((prevIsOpen) => !prevIsOpen)
   }
 

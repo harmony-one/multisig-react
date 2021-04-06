@@ -10,7 +10,7 @@ import {
   SafeFeatures,
   Wallets,
 } from 'src/config/networks/network.d'
-import { APP_ENV, ETHERSCAN_API_KEY, GOOGLE_ANALYTICS_ID, INFURA_TOKEN, NETWORK, NODE_ENV } from 'src/utils/constants'
+import { APP_ENV, NETWORK, NODE_ENV } from 'src/utils/constants'
 import { ensureOnce } from 'src/utils/singleton'
 
 export const getNetworkId = (): HARMONY_NETWORK => HARMONY_NETWORK[NETWORK]
@@ -106,8 +106,6 @@ export const getNetworkConfigDisabledWallets = (): Wallets => getConfig()?.disab
 
 export const getNetworkInfo = (): NetworkSettings => getConfig().network
 
-export const getGoogleAnalyticsTrackingID = (): string => GOOGLE_ANALYTICS_ID
-
 const fetchContractABI = memoize(
   async (url: string, contractAddress: string, apiKey?: string) => {
     let params: Record<string, string> = {
@@ -133,9 +131,6 @@ const fetchContractABI = memoize(
 
 const getNetworkExplorerApiKey = (networkExplorerName: string): string | undefined => {
   switch (networkExplorerName.toLowerCase()) {
-    case 'etherscan': {
-      return ETHERSCAN_API_KEY
-    }
     default: {
       return undefined
     }

@@ -77,20 +77,19 @@ export const WelcomeLayout = ({ isOldMultisigMigration }: Props): React.ReactEle
     <Block>
       {/* Title */}
       <Title size="md" strong>
-        Welcome to BSC Gnosis Safe Multisig.
+        Welcome to Harmony Multisig Wallet.
       </Title>
 
       {/* Subtitle */}
       <Title size="xs">
         {isOldMultisigMigration ? (
           <>
-            We will replicate the owner structure from your existing Gnosis MultiSig to let you test the new interface.
+            We will replicate the owner structure from your existing Harmony MultiSig to let you test the new interface.
             As soon as you feel comfortable, start moving funds to your new Safe.
           </>
         ) : (
           <>
-            Gnosis Safe Multisig is the most trusted platform to manage digital assets. <br /> Here is how to get
-            started:{' '}
+            Harmony Multisig is the most trusted platform to manage digital assets. <br /> Here is how to get started:{' '}
           </>
         )}
       </Title>
@@ -108,20 +107,9 @@ export const WelcomeLayout = ({ isOldMultisigMigration }: Props): React.ReactEle
               </StyledTitle>
             </TitleWrapper>
             <Text size="xl">
-              Gnosis Safe Multisig supports a wide range of wallets that you can choose to be one of the authentication
+              Harmony Multisig supports a wide range of wallets that you can choose to be one of the authentication
               factors.
             </Text>
-            <StyledButtonLink textSize="xl" color="primary" iconType="externalLink" iconSize="sm">
-              <LinkSRC
-                size="xl"
-                href="https://help.gnosis-safe.io/en/articles/4689442-why-do-i-need-to-connect-a-wallet"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="More info about: Why do I need to connect wallet?"
-              >
-                Why do I need to connect wallet?
-              </LinkSRC>
-            </StyledButtonLink>
             <StyledButton
               size="lg"
               color="primary"

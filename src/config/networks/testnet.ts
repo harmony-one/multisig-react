@@ -37,8 +37,8 @@ const testnet: NetworkConfig = {
     isTestNet: true,
     nativeCoin: {
       address: '0x000',
-      name: 'Ether',
-      symbol: 'ETH',
+      name: 'Harmony',
+      symbol: 'ONE',
       decimals: 18,
       logoUri: HarmonyLogo,
     },

@@ -54,18 +54,18 @@ const AddressInput = ({
     <OnChange name={name}>
       {async (value) => {
         const address = trimSpaces(value)
-        if (isValidEnsName(address) || isValidCryptoDomainName(address)) {
-          try {
+        try {
+          if (isValidEnsName(address) || isValidCryptoDomainName(address)) {
             const resolverAddr = await getAddressFromENS(address)
             const formattedAddress = checksumAddress(resolverAddr)
             console.log('passed', address)
             fieldMutator(formattedAddress)
-          } catch (err) {
-            console.error('Failed to resolve address for ENS name: ', err)
+          } else {
+            const formattedAddress = checksumAddress(address)
+            fieldMutator(formattedAddress)
           }
-        } else {
-          const formattedAddress = checksumAddress(address)
-          fieldMutator(formattedAddress)
+        } catch (err) {
+          console.log('Failed to resolve address for ENS name: ', err.message)
         }
       }}
     </OnChange>

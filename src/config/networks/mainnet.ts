@@ -37,7 +37,7 @@ const mainnet: NetworkConfig = {
     isTestNet: false,
     nativeCoin: {
       address: '0x000',
-      name: 'ONE',
+      name: 'Harmony',
       symbol: 'ONE',
       decimals: 18,
       logoUri: HarmonyLogo,

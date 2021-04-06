@@ -15,7 +15,7 @@ import Row from 'src/components/layout/Row'
 import { border, headerHeight, md, screenSm, sm } from 'src/theme/variables'
 import { useStateHandler } from 'src/logic/hooks/useStateHandler'
 
-import SafeLogo from '../assets/binance_dex.svg'
+import HarmonyLogo from '../assets/logo.png'
 
 const styles = () => ({
   root: {
@@ -38,10 +38,8 @@ const styles = () => ({
     zIndex: 1301,
   },
   logo: {
-    flexBasis: '114px',
     flexShrink: '0',
     flexGrow: '0',
-    maxWidth: '55px',
     padding: sm,
     marginTop: '4px',
     [`@media (min-width: ${screenSm}px)`]: {
@@ -62,7 +60,7 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
     <Row className={classes.summary}>
       <Col className={classes.logo} middle="xs" start="xs">
         <Link to="/">
-          <Img alt="Gnosis Team Safe" height={36} src={SafeLogo} testId="heading-gnosis-logo" />
+          <Img alt="Harmony Multisig" height={36} src={HarmonyLogo} testId="heading-multisig-logo" />
         </Link>
       </Col>
       <Spacer />
