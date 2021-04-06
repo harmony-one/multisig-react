@@ -15,7 +15,7 @@ module.exports = async function (params) {
     return;
   }
   // Same appId in electron-builder.
-  let appId = "io.gnosis.safe.macos";
+  let appId = "io.harmony.safe.macos";
   let appPath = path.join(
     params.appOutDir,
     `${params.packager.appInfo.productFilename}.app`
