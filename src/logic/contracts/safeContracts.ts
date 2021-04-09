@@ -16,10 +16,10 @@ import { SPENDING_LIMIT_MODULE_ADDRESS } from 'src/utils/constants'
 import SpendingLimitModule from './artifacts/AllowanceModule.json'
 
 export const SENTINEL_ADDRESS = '0x0000000000000000000000000000000000000001'
-export const MULTI_SEND_ADDRESS = '0xDEff67e9A02b4Ce60ff62F3CB5FFB41d48856285'
-export const SAFE_MASTER_COPY_ADDRESS = '0x3736aC8400751bf07c6A2E4db3F4f3D9D422abB2'
-export const DEFAULT_FALLBACK_HANDLER_ADDRESS = '0xC5d654bcE1220241FCe1f0F1D6b9E04f75175452'
-export const SAFE_MASTER_COPY_ADDRESS_V10 = '0x3736aC8400751bf07c6A2E4db3F4f3D9D422abB2'
+export const MULTI_SEND_ADDRESS = '0xF39E79A7B8B319a2554abd3469463f6620C117Bb'
+export const SAFE_MASTER_COPY_ADDRESS = '0x0F2f043DBc72D3948bB7E392E6E3258dc2743376'
+export const DEFAULT_FALLBACK_HANDLER_ADDRESS = '0x6B0d84741F7EE66B72bF262A1eDB772d01E2aFE6'
+export const SAFE_MASTER_COPY_ADDRESS_V10 = '0x0F2f043DBc72D3948bB7E392E6E3258dc2743376'
 
 let proxyFactoryMaster: GnosisSafeProxyFactory
 let safeMaster: GnosisSafe
@@ -33,7 +33,7 @@ export const getGnosisSafeContract = (web3: Web3, networkId: HARMONY_NETWORK) =>
   // TODO: this may not be the most scalable approach,
   //  but up until v1.2.0 the address is the same for all the networks.
   //  So, if we can't find the network in the Contract artifact, we fallback to MAINNET.
-  const contractAddress = '0x3736aC8400751bf07c6A2E4db3F4f3D9D422abB2'
+  const contractAddress = '0x0F2f043DBc72D3948bB7E392E6E3258dc2743376'
   return (new web3.eth.Contract(GnosisSafeSol.abi as AbiItem[], contractAddress) as unknown) as GnosisSafe
 }
 
@@ -46,7 +46,7 @@ const getProxyFactoryContract = (web3: Web3, networkId: HARMONY_NETWORK): Gnosis
   // TODO: this may not be the most scalable approach,
   //  but up until v1.2.0 the address is the same for all the networks.
   //  So, if we can't find the network in the Contract artifact, we fallback to MAINNET.
-  const contractAddress = '0x4f9b1dEf3a0f6747bF8C870a27D3DeCdf029100e'
+  const contractAddress = '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07'
   return (new web3.eth.Contract(ProxyFactorySol.abi as AbiItem[], contractAddress) as unknown) as GnosisSafeProxyFactory
 }
 
