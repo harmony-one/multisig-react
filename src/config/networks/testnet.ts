@@ -3,7 +3,7 @@ import { EnvironmentSettings, HARMONY_NETWORK, NetworkConfig } from 'src/config/
 
 const baseConfig: EnvironmentSettings = {
   txServiceUrl: 'https://multisig-staging.hmny.io/api/v1',
-  safeAppsUrl: 'https://safe-apps.dev.gnosisdev.com',
+  safeAppsUrl: 'https://testnet.multisig.harmony.one',
   gasPriceOracle: {
     url: 'https://ethgasstation.info/json/ethgasAPI.json',
     gasParameter: 'average',
@@ -21,12 +21,12 @@ const testnet: NetworkConfig = {
     },
     staging: {
       ...baseConfig,
-      safeAppsUrl: 'https://safe-apps.staging.gnosisdev.com',
+      safeAppsUrl: 'https://testnet.multisig.harmony.one',
     },
     production: {
       ...baseConfig,
       txServiceUrl: 'https://multisig-staging.hmny.io/api/v1',
-      safeAppsUrl: 'https://apps.gnosis-safe.io',
+      safeAppsUrl: 'https://testnet.multisig.harmony.one',
     },
   },
   network: {

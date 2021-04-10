@@ -3,7 +3,7 @@ import { EnvironmentSettings, HARMONY_NETWORK, NetworkConfig } from 'src/config/
 
 const baseConfig: EnvironmentSettings = {
   txServiceUrl: 'http://multisig.t.hmny.io/api/v1',
-  safeAppsUrl: 'https://safe-apps.dev.gnosisdev.com',
+  safeAppsUrl: 'https://multisig.harmony.one',
   gasPriceOracle: {
     url: 'https://ethgasstation.info/json/ethgasAPI.json',
     gasParameter: 'average',
@@ -11,7 +11,7 @@ const baseConfig: EnvironmentSettings = {
   rpcServiceUrl: 'https://api.s0.t.hmny.io',
   networkExplorerName: 'Harmony Explorer',
   networkExplorerUrl: 'https://explorer.harmony.one/#',
-  networkExplorerApiUrl: 'https://api.bscscan.com/api',
+  networkExplorerApiUrl: 'https://api.etherscan.io/api',
 }
 
 const mainnet: NetworkConfig = {
@@ -21,12 +21,12 @@ const mainnet: NetworkConfig = {
     },
     staging: {
       ...baseConfig,
-      safeAppsUrl: 'https://safe-apps.staging.gnosisdev.com',
+      safeAppsUrl: 'https://multisig.harmony.one',
     },
     production: {
       ...baseConfig,
       txServiceUrl: 'http://multisig.t.hmny.io/api/v1',
-      safeAppsUrl: 'https://apps.gnosis-safe.io',
+      safeAppsUrl: 'https://multisig.harmony.one',
     },
   },
   network: {
