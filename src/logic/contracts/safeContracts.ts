@@ -46,7 +46,7 @@ const getProxyFactoryContract = (web3: Web3, networkId: HARMONY_NETWORK): Gnosis
   // TODO: this may not be the most scalable approach,
   //  but up until v1.2.0 the address is the same for all the networks.
   //  So, if we can't find the network in the Contract artifact, we fallback to MAINNET.
-  const contractAddress = '0x02d954F1a5B79063c8D44b7eE6810FcDb28d0b07'
+  const contractAddress = '0xAaCf9eb6614f7C110EF9b7D832BCe2E67EEC08c1'
   return (new web3.eth.Contract(ProxyFactorySol.abi as AbiItem[], contractAddress) as unknown) as GnosisSafeProxyFactory
 }
 
