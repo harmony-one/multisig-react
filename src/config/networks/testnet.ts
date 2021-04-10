@@ -2,7 +2,7 @@ import HarmonyLogo from 'src/config/assets/token-one.png'
 import { EnvironmentSettings, HARMONY_NETWORK, NetworkConfig } from 'src/config/networks/network.d'
 
 const baseConfig: EnvironmentSettings = {
-  txServiceUrl: 'http://localhost:8000/api/v1',
+  txServiceUrl: 'https://multisig-staging.hmny.io/api/v1',
   safeAppsUrl: 'https://safe-apps.dev.gnosisdev.com',
   gasPriceOracle: {
     url: 'https://ethgasstation.info/json/ethgasAPI.json',
@@ -25,7 +25,7 @@ const testnet: NetworkConfig = {
     },
     production: {
       ...baseConfig,
-      txServiceUrl: 'http://localhost:8000/api/v1',
+      txServiceUrl: 'https://multisig-staging.hmny.io/api/v1',
       safeAppsUrl: 'https://apps.gnosis-safe.io',
     },
   },

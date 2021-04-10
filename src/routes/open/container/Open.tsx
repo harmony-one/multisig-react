@@ -1,7 +1,6 @@
 import { Loader } from '@gnosis.pm/safe-react-components'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'
-import ReactGA from 'react-ga'
 import { useDispatch, useSelector } from 'react-redux'
 import Opening from 'src/routes/opening'
 import { Layout } from 'src/routes/open/components/Layout'
@@ -146,11 +145,6 @@ const Open = (): React.ReactElement => {
     const safeProps = await getSafeProps(safeAddress, name, ownersNames, ownerAddresses)
 
     await dispatch(addOrUpdateSafe(safeProps))
-
-    ReactGA.event({
-      category: 'User',
-      action: 'Created a safe',
-    })
 
     removeFromStorage(SAFE_PENDING_CREATION_STORAGE_KEY)
     const url = {

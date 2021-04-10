@@ -1,5 +1,3 @@
-import ReactGA from 'react-ga'
-
 import addProvider from './addProvider'
 
 import { getNetworkId, getNetworkInfo } from 'src/config'
@@ -39,11 +37,6 @@ const handleProviderNotification = (provider, dispatch) => {
     // you SHOULD pass your own `key` in the options. `key` can be any sequence
     // of number or characters, but it has to be unique to a given snackbar.
 
-    ReactGA.event({
-      category: 'Wallets',
-      action: 'Connect a wallet',
-      label: provider.name,
-    })
     dispatch(enqueueSnackbar(enhanceSnackbarForAction(NOTIFICATIONS.WALLET_CONNECTED_MSG)))
   } else {
     dispatch(enqueueSnackbar(enhanceSnackbarForAction(NOTIFICATIONS.UNLOCK_WALLET_MSG)))
