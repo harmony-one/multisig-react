@@ -5,7 +5,6 @@ import { ListItemType } from 'src/components/List'
 import Header from './Header'
 import Footer from './Footer'
 import Sidebar from './Sidebar'
-import { MobileNotSupported } from './MobileNotSupported'
 
 const Container = styled.div`
   height: 100vh;
@@ -87,10 +86,6 @@ const Layout: React.FC<Props> = ({
   children,
   sidebarItems,
 }): React.ReactElement => {
-  const [mobileNotSupportedClosed, setMobileNotSupportedClosed] = useState(false)
-
-  const closeMobileNotSupported = () => setMobileNotSupportedClosed(true)
-
   return (
     <Container>
       <HeaderWrapper>
@@ -114,8 +109,6 @@ const Layout: React.FC<Props> = ({
           <Footer />
         </ContentWrapper>
       </BodyWrapper>
-
-      {!mobileNotSupportedClosed && <MobileNotSupported onClose={closeMobileNotSupported} />}
     </Container>
   )
 }
