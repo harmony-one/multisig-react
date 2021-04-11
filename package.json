@@ -45,12 +45,6 @@
     "build-storybook": "build-storybook -s public",
     "sentry-upload-sourcemaps": "sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -o $SENTRY_ORG -p $SENTRY_PROJECT files $npm_package_version upload-sourcemaps ./build/static/js/"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --allow-empty",
-      "pre-push": "tsc --noEmit --incremental"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
