@@ -1,6 +1,6 @@
 # Harmony Safe Multisig
 
-The most trusted platform to store digital assets on Ethereum
+The most trusted platform to store digital assets on Harmony
 
 ## Getting Started
 
@@ -115,15 +115,6 @@ Add additional notes about how to deploy this on a live system
 ## Configuring the app for running on different networks
 
 [Please check the network configuration documentation](./docs/networks.md)
-
-## Built With
-
-- [Truffle React Box](https://github.com/truffle-box/react-box) - The web framework used
-- [Ganache](https://github.com/trufflesuite/ganache-cli) - Fast Ethereum RPC client
-- [React](https://reactjs.org/) - A JS library for building user interfaces
-- [Material UI 4.X](https://material-ui.com/) - React components that implement Google's Material Design
-- [redux, immutable, reselect, final-form](https://redux.js.org/) - React ecosystem libraries
-- [Flow](https://flow.org/) - Static Type Checker
 
 ## Contributing
 
