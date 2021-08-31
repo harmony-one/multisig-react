@@ -40,23 +40,38 @@ const TxsTable = (): React.ReactElement => {
   const autoColumns = columns.filter((c) => !c.custom)
   const filteredData = getTxTableData(transactions, cancellationTransactions)
     .sort((tx1, tx2) => {
-      // First order by nonce
-      const aNonce = Number(tx1.tx?.nonce)
-      const bNonce = Number(tx1.tx?.nonce)
-      if (aNonce && bNonce) {
-        const difference = aNonce - bNonce
-        if (difference !== 0) {
-          return difference
+        // fix tx flickering as python backend returns inconsistent timestamps
+        const a = tx1.tx.blockNumber
+        const b = tx2.tx.blockNumber
+
+        if (!a) {
+            return -1
         }
-      }
-      // If can't be ordered by nonce, order by date
-      const aDateOrder = tx1.dateOrder
-      const bDateOrder = tx2.dateOrder
-      // Second by date
-      if (!aDateOrder || !bDateOrder) {
-        return 0
-      }
-      return aDateOrder - bDateOrder
+        if (!b) {
+            return 1
+        }
+        return a - b
+
+        /*  // First order by nonce
+          const aNonce = Number(tx1.tx?.nonce)
+          const bNonce = Number(tx1.tx?.nonce)
+          if (aNonce && bNonce) {
+            const difference = aNonce - bNonce
+            if (difference !== 0) {
+              return difference
+            }
+          }
+          // If can't be ordered by nonce, order by date
+          const aDateOrder = tx1.dateOrder
+          const bDateOrder = tx2.dateOrder
+          // Second by date
+          if (!aDateOrder || !bDateOrder) {
+            return 0
+          }
+
+          return aDateOrder - bDateOrder
+          */
+
     })
     .map((tx, id) => {
       return {

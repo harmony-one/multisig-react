@@ -12,3 +12,4 @@ yalc.lock
 /coverage/
 src/types/contracts/
 tsconfig.tsbuildinfo
+*.iml
