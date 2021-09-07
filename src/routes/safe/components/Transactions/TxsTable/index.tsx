@@ -40,19 +40,7 @@ const TxsTable = (): React.ReactElement => {
   const autoColumns = columns.filter((c) => !c.custom)
   const filteredData = getTxTableData(transactions, cancellationTransactions)
     .sort((tx1, tx2) => {
-        // fix tx flickering as python backend returns inconsistent timestamps
-        const a = tx1.tx.blockNumber
-        const b = tx2.tx.blockNumber
-
-        if (!a) {
-            return -1
-        }
-        if (!b) {
-            return 1
-        }
-        return a - b
-
-        /*  // First order by nonce
+          // First order by nonce
           const aNonce = Number(tx1.tx?.nonce)
           const bNonce = Number(tx1.tx?.nonce)
           if (aNonce && bNonce) {
@@ -70,8 +58,6 @@ const TxsTable = (): React.ReactElement => {
           }
 
           return aDateOrder - bDateOrder
-          */
-
     })
     .map((tx, id) => {
       return {
