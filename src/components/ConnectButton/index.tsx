@@ -20,7 +20,6 @@ export const onboard = Onboard({
   networkId: networkId,
   subscriptions: {
     wallet: (wallet) => {
-      console.log({wallet})
       if (wallet.provider) {
         // this function will intialize web3 and store it somewhere available throughout the dapp and
         // can also instantiate your contracts with the web3 instance
