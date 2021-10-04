@@ -13,3 +13,8 @@ yalc.lock
 src/types/contracts/
 tsconfig.tsbuildinfo
 *.iml
+firebase.json
+.firebaserc
+.firebase
+functions
+

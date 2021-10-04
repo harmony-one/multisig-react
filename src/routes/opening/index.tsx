@@ -226,7 +226,10 @@ const SafeDeployment = ({ creationTxHash, onCancel, onRetry, onSuccess, submitte
       if (creationTxHash !== undefined) {
         try {
           const res = await isTxMined(creationTxHash)
+
+          console.log('setting step 4 if res', res)
           if (res) {
+            console.log('setting step 4 done!')
             setStepIndex(4)
             setWaitingSafeDeployed(true)
             setIntervalStarted(false)
@@ -248,7 +251,9 @@ const SafeDeployment = ({ creationTxHash, onCancel, onRetry, onSuccess, submitte
     const awaitUntilSafeIsDeployed = async (safeCreationTxHash: string) => {
       try {
         const web3 = getWeb3()
+
         const receipt = await web3.eth.getTransactionReceipt(safeCreationTxHash)
+
 
         let safeAddress
 
@@ -273,6 +278,7 @@ const SafeDeployment = ({ creationTxHash, onCancel, onRetry, onSuccess, submitte
 
         interval = setInterval(async () => {
           const code = await web3.eth.getCode(safeAddress)
+
           if (code !== EMPTY_DATA) {
             setStepIndex(5)
           }
@@ -284,6 +290,11 @@ const SafeDeployment = ({ creationTxHash, onCancel, onRetry, onSuccess, submitte
 
     if (!waitingSafeDeployed) {
       return
+    }
+
+    // hack
+    if (safeCreationTxHash.length && Array.isArray(safeCreationTxHash)) {
+      setSafeCreationTxHash(safeCreationTxHash[0])
     }
 
     if (typeof safeCreationTxHash === 'string') {

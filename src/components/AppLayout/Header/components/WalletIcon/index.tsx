@@ -22,6 +22,7 @@ interface WalletIconProps {
 
 const WalletIcon = ({ provider }: WalletIconProps): React.ReactElement => {
   const classes = useStyles()
+
   return (
     <Col className={classes.container} layout="column" start="sm">
       <Img

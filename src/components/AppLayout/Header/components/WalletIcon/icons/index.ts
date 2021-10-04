@@ -12,6 +12,7 @@ import torusIcon from './icon-torus.svg'
 import uniloginIcon from './icon-unilogin.svg'
 import coinbaseIcon from './icon-coinbase.svg'
 import operaIcon from './icon-opera.png'
+import oneWalletIcon from './icon-onewallet.svg'
 
 import { WALLET_PROVIDER } from 'src/logic/wallets/getWeb3'
 
@@ -77,6 +78,10 @@ const WALLET_ICONS: WalletObjectsProps<IconValue> = {
   },
   [WALLET_PROVIDER.WALLETLINK]: {
     src: coinbaseIcon,
+    height: 25,
+  },
+  [WALLET_PROVIDER.ONEWALLET]: {
+    src: oneWalletIcon,
     height: 25,
   },
 }

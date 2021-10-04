@@ -1,4 +1,4 @@
-import Onboard from 'bnc-onboard'
+import Onboard from 'harmony-jenya-bnc-onboard'
 import React from 'react'
 
 import Button from 'src/components/layout/Button'
