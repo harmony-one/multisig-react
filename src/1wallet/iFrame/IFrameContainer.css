@@ -1,0 +1,24 @@
+.container {
+    padding: 20px;
+}
+
+.input-field {
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    outline: none;
+}
+
+.btn {
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(1, 174, 233);
+    height: 60px;
+    border-radius: 10px;
+    width: 340px;
+    outline: none;
+}

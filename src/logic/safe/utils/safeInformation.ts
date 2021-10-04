@@ -18,12 +18,18 @@ export type SafeInfoError = {
   arguments: string[]
 }
 
-export const getSafeInfo = (safeAddress: string): Promise<void | SafeInfo> => {
+export const getSafeInfo = (safeAddress: string, retries = 3): Promise<void | SafeInfo> => {
   const safeInfoUrl = buildSafeInformationUrl(safeAddress)
   return axios
     .get<SafeInfo, AxiosResponse<SafeInfo>>(safeInfoUrl)
     .then((response) => response.data)
-    .catch((error: AxiosError<SafeInfoError>) => {
+    .catch(async (error: AxiosError<SafeInfoError>) => {
+      if (retries > 0) {
+        console.log('getSafeInfo failed to retrieve safe Information. Retrying...')
+        await new Promise((r) => setTimeout(r, 5000))
+        return getSafeInfo(safeAddress, retries - 1)
+      }
+
       console.error(
         'Failed to retrieve safe Information',
         error.response?.statusText ?? error.response?.data.message ?? error,

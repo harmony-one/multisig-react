@@ -71,6 +71,7 @@ export const createSafe = (values, userAccount) => {
       await checkReceiptStatus(receipt.transactionHash)
       const safeAddress = receipt.events?.ProxyCreation.returnValues.proxy
       const safeProps = await getSafeProps(safeAddress, name, ownersNames, ownerAddresses)
+
       // returning info for testing purposes, in app is fully async
       return { safeAddress: safeProps.address, safeTx: receipt }
     })
