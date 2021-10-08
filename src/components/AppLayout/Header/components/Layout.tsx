@@ -62,6 +62,7 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
         <Link to="/">
           <Img alt="Harmony Multisig" height={36} src={HarmonyLogo} testId="heading-multisig-logo" />
         </Link>
+        <span>(based on Gnosis Safe)</span>
       </Col>
       <Spacer />
       <Provider
