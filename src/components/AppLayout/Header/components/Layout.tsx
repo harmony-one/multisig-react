@@ -15,7 +15,7 @@ import Row from 'src/components/layout/Row'
 import { border, headerHeight, md, screenSm, sm } from 'src/theme/variables'
 import { useStateHandler } from 'src/logic/hooks/useStateHandler'
 
-import HarmonyLogo from '../assets/logo.png'
+import HarmonyLogo from 'src/assets/icons/icon-onewallet.svg'
 
 const styles = () => ({
   root: {
@@ -62,7 +62,10 @@ const Layout = ({ classes, providerDetails, providerInfo }) => {
         <Link to="/">
           <Img alt="Harmony Multisig" height={36} src={HarmonyLogo} testId="heading-multisig-logo" />
         </Link>
-        <span>(based on Gnosis Safe)</span>
+        &nbsp;
+        <span style={{fontSize: '22px'}}>Harmony Multisig</span>
+        &nbsp;
+        <span style={{opacity: '0.4'}}>(based on Gnosis Safe)</span>
       </Col>
       <Spacer />
       <Provider
