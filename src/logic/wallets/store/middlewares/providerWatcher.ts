@@ -44,7 +44,7 @@ const providerWatcherMware = (store) => (next) => async (action) => {
           if (currentProviderProps.account !== providerInfo.account || networkChanged) {
             store.dispatch(fetchProvider(currentProviderProps.name))
           }
-        }, 2000)
+        }, 5000)
 
         break
       }
