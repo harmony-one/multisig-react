@@ -21,8 +21,8 @@ store.dispatch(loadSafesFromStorage())
 store.dispatch(loadDefaultSafe())
 store.dispatch(loadCurrentSessionFromStorage())
 
-/*const root = document.getElementById('root')
+const root = document.getElementById('root')
 
 if (root !== null) {
   ReactDOM.render(<Root />, root)
-}*/
+}
