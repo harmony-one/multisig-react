@@ -18,7 +18,7 @@ export type SafeInfoError = {
   arguments: string[]
 }
 
-export const getSafeInfo = (safeAddress: string, retries = 3): Promise<void | SafeInfo> => {
+export const getSafeInfo = (safeAddress: string, retries = 1): Promise<void | SafeInfo> => {
   const safeInfoUrl = buildSafeInformationUrl(safeAddress)
   return axios
     .get<SafeInfo, AxiosResponse<SafeInfo>>(safeInfoUrl)
