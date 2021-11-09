@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getSafeServiceBaseUrl } from 'src/config'
 import { TokenProps } from 'src/logic/tokens/store/model/token'
 
+
 export type BalanceEndpoint = {
   tokenAddress: string
   token?: TokenProps
@@ -11,6 +12,7 @@ export type BalanceEndpoint = {
   fiatConversion: string
   fiatCode: string
 }
+
 
 export const fetchTokenCurrenciesBalances = (
   safeAddress: string,
