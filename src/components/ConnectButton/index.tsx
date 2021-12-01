@@ -18,6 +18,8 @@ const wallets = getSupportedWallets()
 
 export const onboard = Onboard({
   networkId: networkId,
+  // Is it mandatory for Ledger to work to send network name in lowercase
+  networkName: 'harmony ' + networkId,
   subscriptions: {
     wallet: (wallet) => {
       console.log({wallet})
