@@ -41,7 +41,6 @@ const getTxDataForModifySettingsTxs = (tx: Transaction): TxData => {
 
   txData.recipient = tx.recipient
   txData.modifySettingsTx = true
-  console.log('getTxDataForModifySettingsTxs', {tx, txData})
 
   if (tx.decodedParams[SAFE_METHODS_NAMES.REMOVE_OWNER]) {
     const { _threshold, owner } = tx.decodedParams[SAFE_METHODS_NAMES.REMOVE_OWNER]
