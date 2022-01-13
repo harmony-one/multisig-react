@@ -43,8 +43,8 @@ async function fetchTransactions(
     const url = getServiceUrl(txType, safeAddress)
 
     // hack as endpoint is too slow now
-
     if (txType === 'incoming') {
+
       return Promise.resolve({ eTag, results: [] })
     }
 
