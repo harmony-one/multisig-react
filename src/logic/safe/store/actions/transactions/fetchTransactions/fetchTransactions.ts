@@ -45,7 +45,7 @@ async function fetchTransactions(
     // hack as endpoint is too slow now
     if (txType === 'incoming') {
 
-      return Promise.resolve({ eTag, results: [] })
+      // return Promise.resolve({ eTag, results: [] })
     }
 
     const response = await axios.get(url, eTag ? { headers: { 'If-None-Match': eTag } } : undefined)
