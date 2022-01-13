@@ -41,6 +41,13 @@ async function fetchTransactions(
   /* eslint-enable */
   try {
     const url = getServiceUrl(txType, safeAddress)
+
+    // hack as endpoint is too slow now
+
+    if (txType === 'incoming') {
+      return Promise.resolve({ eTag, results: [] })
+    }
+
     const response = await axios.get(url, eTag ? { headers: { 'If-None-Match': eTag } } : undefined)
 
     if (response.data.count > 0) {
