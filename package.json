@@ -30,7 +30,7 @@
     "generate-types:spendingLimit": "cross-env typechain --target=web3-v1 --outDir './src/types/contracts' ./src/logic/contracts/artifacts/*.json",
     "lint:check": "eslint './src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "yarn lint:check --fix",
-    "postinstall": "patch-package && electron-builder install-app-deps && yarn generate-types",
+    "postinstall": "yarn generate-types",
     "preelectron-pack": "yarn build",
     "prettier:check": "yarn prettier --check",
     "prettier:fix": "yarn prettier --write",
