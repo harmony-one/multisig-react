@@ -2,7 +2,7 @@ FROM node:14-slim as builder
 WORKDIR /app
 COPY . .
 RUN apt update && apt install git -y
-RUN yarn
+RUN yarn install --network-timeout 1000000
 RUN yarn build-mainnet
 
 
