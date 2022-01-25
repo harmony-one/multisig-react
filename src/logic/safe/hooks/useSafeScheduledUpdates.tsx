@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { batch, useDispatch } from 'react-redux'
 
 import { fetchCollectibles } from 'src/logic/collectibles/store/actions/fetchCollectibles'
@@ -9,8 +9,9 @@ import fetchTransactions from 'src/logic/safe/store/actions/transactions/fetchTr
 import { TIMEOUT } from 'src/utils/constants'
 
 export const useSafeScheduledUpdates = (safeLoaded: boolean, safeAddress?: string): void => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
   const timer = useRef<number>()
+  const [isInitialLoad, setInitialLoad] = useState(true)
 
   useEffect(() => {
     // using this variable to prevent setting a timeout when the component is already unmounted or the effect
@@ -18,17 +19,22 @@ export const useSafeScheduledUpdates = (safeLoaded: boolean, safeAddress?: strin
     let mounted = true
     const fetchSafeData = async (address: string): Promise<void> => {
       await batch(async () => {
-        await Promise.all([
+        const promises = [
           dispatch(fetchEtherBalance(address)),
           dispatch(fetchSafeTokens(address)),
-          dispatch(fetchTransactions(address)),
           dispatch(fetchCollectibles(address)),
           dispatch(checkAndUpdateSafe(address)),
-        ])
+        ]
+        // Don't make heavy request twice: transactions is loaded on useLoadSafe init
+        if (!isInitialLoad) {
+          promises.push(dispatch(fetchTransactions(address)))
+        }
+        await Promise.all(promises)
       })
 
       if (mounted) {
         timer.current = window.setTimeout(() => {
+          setInitialLoad(false)
           fetchSafeData(address)
         }, TIMEOUT * 60)
       }
@@ -42,5 +48,5 @@ export const useSafeScheduledUpdates = (safeLoaded: boolean, safeAddress?: strin
       mounted = false
       clearTimeout(timer.current)
     }
-  }, [dispatch, safeAddress, safeLoaded])
+  }, [dispatch, safeAddress, safeLoaded, isInitialLoad])
 }
