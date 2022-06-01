@@ -75,12 +75,15 @@ export const mustBeEthereumAddress = memoize(
 export const mustBeEthereumContractAddress = memoize(
   async (address: string): Promise<ValidatorReturnType> => {
     const contractCode = await getWeb3().eth.getCode(address)
+    const isPrecompile = address.toLowerCase() === '0x00000000000000000000000000000000000000fc'
 
     const errorMessage = `Address should be a valid Ethereum contract address${
       isFeatureEnabled(FEATURES.ENS_LOOKUP) ? ' or ENS name' : ''
     }`
 
-    return !contractCode || contractCode.replace('0x', '').replace(/0/g, '') === '' ? errorMessage : undefined
+    return !isPrecompile && (!contractCode || contractCode.replace('0x', '').replace(/0/g, '')) === ''
+      ? errorMessage
+      : undefined
   },
 )
 
