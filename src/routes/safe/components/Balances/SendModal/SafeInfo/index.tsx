@@ -57,9 +57,9 @@ const SafeInfo = () => {
     <div>
       <AddressInfo ethBalance={ethBalance} safeAddress={safeAddress} safeName={safeName} />
       <StakingInfoWrapper>
-        {stakingAmount.isGreaterThan(0) && <div>Staked: {formatNumber(stakingAmount)} ONE</div>}
-        {stakingReward.isGreaterThan(0) && <div>Reward: {formatNumber(stakingReward)} ONE</div>}
-        {stakingUndelegated.isGreaterThan(0) && <div>Undelegated: {formatNumber(stakingUndelegated)} ONE</div>}
+        {<div>Staked: {formatNumber(stakingAmount)} ONE</div>}
+        {<div>Reward: {formatNumber(stakingReward)} ONE</div>}
+        {<div>Unstaked: {formatNumber(stakingUndelegated)} ONE</div>}
       </StakingInfoWrapper>
     </div>
   )
