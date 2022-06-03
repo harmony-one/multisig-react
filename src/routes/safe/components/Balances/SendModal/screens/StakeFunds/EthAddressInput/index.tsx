@@ -2,10 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import React, { useState } from 'react'
 import { useFormState, useField } from 'react-final-form'
 
-import { ScanQRWrapper } from 'src/components/ScanQRModal/ScanQRWrapper'
 import { ContractsAddressBookInput } from 'src/routes/safe/components/Balances/SendModal/screens/AddressBookInput'
-import Field from 'src/components/forms/Field'
-import TextField from 'src/components/forms/TextField'
 import {
   composeValidators,
   mustBeEthereumAddress,
@@ -16,6 +13,7 @@ import {
 import Col from 'src/components/layout/Col'
 import Row from 'src/components/layout/Row'
 import { styles } from 'src/routes/safe/components/Balances/SendModal/screens/ContractInteraction/style'
+import {ScanQRWrapper} from "../../../../../../../../components/ScanQRModal/ScanQRWrapper";
 
 const useStyles = makeStyles(styles)
 
@@ -50,10 +48,22 @@ export const EthAddressInput = ({
     name: '',
   })
 
+  const handleScan = (value, closeQrModal) => {
+    let scannedAddress = value
+
+    if (scannedAddress.startsWith('ethereum:')) {
+      scannedAddress = scannedAddress.replace('ethereum:', '')
+    }
+
+    setSelectedEntry({ address: scannedAddress })
+    onScannedValue(scannedAddress)
+    closeQrModal()
+  }
+
   return (
     <>
       <Row margin="md">
-        <Col xs={5}>
+        <Col xs={11}>
           <ContractsAddressBookInput
             label={text}
             setSelectedEntry={setSelectedEntry}
@@ -61,6 +71,9 @@ export const EthAddressInput = ({
             fieldMutator={onScannedValue}
             pristine={pristine}
           />
+        </Col>
+        <Col center="xs" className={classes} middle="xs" xs={1}>
+          <ScanQRWrapper handleScan={handleScan} />
         </Col>
       </Row>
     </>

@@ -69,7 +69,6 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
       try {
         const { signatureHash } = selectedMethod
         const valueDecimals = value ? (value * Math.pow(10, 18)).toString() : '0'
-        console.log('valueDecimals', valueDecimals, value)
         const formValues = {
           ...values,
           [`methodInput-${signatureHash}_0_address`]: safeAddress,
@@ -87,7 +86,7 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
           return
         }
 
-        onNext({ ...values, contractAddress, data, selectedMethod, value: '' }, submit)
+        onNext({ ...formValues, contractAddress, data, selectedMethod, value: '' }, submit)
       } catch (error) {
         return handleSubmitError(error, values)
       }

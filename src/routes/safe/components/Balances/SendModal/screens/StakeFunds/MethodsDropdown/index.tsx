@@ -72,7 +72,12 @@ const MethodsDropdown = ({ onChange }: MethodsDropdownProps): React.ReactElement
       <Col>
         <MuiThemeProvider theme={DropdownListTheme}>
           <>
-            <button className={classes.button} onClick={handleClick} type="button">
+            <button
+              className={classes.button}
+              onClick={handleClick}
+              type="button"
+              style={{ height: '42px', padding: '8px 0 8px 0' }}
+            >
               <span className={classNames(classes.buttonInner, anchorEl && classes.openMenuButton)}>
                 {(selectedMethod as Record<string, string>).name}
               </span>
