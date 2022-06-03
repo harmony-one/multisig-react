@@ -50,49 +50,17 @@ export const EthAddressInput = ({
     name: '',
   })
 
-  const handleScan = (value, closeQrModal) => {
-    let scannedAddress = value
-
-    if (scannedAddress.startsWith('ethereum:')) {
-      scannedAddress = scannedAddress.replace('ethereum:', '')
-    }
-
-    setSelectedEntry({ address: scannedAddress })
-    onScannedValue(scannedAddress)
-    closeQrModal()
-  }
-
-  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const { value } = event.target
-    setSelectedEntry({ address: value })
-  }
-
   return (
     <>
       <Row margin="md">
-        <Col xs={11}>
-          {selectedEntry?.address ? (
-            <Field
-              component={TextField}
-              name={name}
-              placeholder={text}
-              onChange={handleInputChange}
-              testId={name}
-              text={text}
-              type="text"
-              validate={validate}
-            />
-          ) : (
-            <ContractsAddressBookInput
-              setSelectedEntry={setSelectedEntry}
-              setIsValidAddress={() => {}}
-              fieldMutator={onScannedValue}
-              pristine={pristine}
-            />
-          )}
-        </Col>
-        <Col center="xs" className={classes} middle="xs" xs={1}>
-          <ScanQRWrapper handleScan={handleScan} />
+        <Col xs={5}>
+          <ContractsAddressBookInput
+            label={text}
+            setSelectedEntry={setSelectedEntry}
+            setIsValidAddress={() => {}}
+            fieldMutator={onScannedValue}
+            pristine={pristine}
+          />
         </Col>
       </Row>
     </>

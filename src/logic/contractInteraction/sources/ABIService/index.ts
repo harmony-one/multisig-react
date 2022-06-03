@@ -50,17 +50,16 @@ export const getMethodAction = ({ stateMutability }: AbiItem): 'read' | 'write' 
 export const extractUsefulMethods = (abi: AbiItem[]): AbiItemExtended[] => {
   const allowedAbiItems = abi.filter(isAllowedMethod) as AllowedAbiItem[]
 
-  return allowedAbiItems
-    .map(
-      (method): AbiItemExtended => ({
-        action: getMethodAction(method),
-        ...getMethodSignatureAndSignatureHash(method),
-        ...method,
-      }),
-    )
-    .sort(({ name: a }, { name: b }) => {
-      return a.toLowerCase() > b.toLowerCase() ? 1 : -1
-    })
+  return allowedAbiItems.map(
+    (method): AbiItemExtended => ({
+      action: getMethodAction(method),
+      ...getMethodSignatureAndSignatureHash(method),
+      ...method,
+    }),
+  )
+  // .sort(({ name: a }, { name: b }) => {
+  //   return a.toLowerCase() > b.toLowerCase() ? 1 : -1
+  // })
 }
 
 export const isPayable = (method: AbiItem | AbiItemExtended): boolean => {

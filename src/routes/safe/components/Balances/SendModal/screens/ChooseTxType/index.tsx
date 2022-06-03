@@ -74,7 +74,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
           <Button
             className={classes.firstButton}
             color="primary"
-            minHeight={52}
+            minHeight={42}
             minWidth={260}
             onClick={() => setActiveScreen('sendFunds')}
             variant="contained"
@@ -87,7 +87,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
             <Button
               className={classes.firstButton}
               color="primary"
-              minHeight={52}
+              minHeight={42}
               minWidth={260}
               onClick={() => setActiveScreen('sendCollectible')}
               variant="contained"
@@ -105,7 +105,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
             <Button
               color="primary"
               disabled={disableContractInteraction}
-              minHeight={52}
+              minHeight={42}
               minWidth={260}
               onClick={() => setActiveScreen('contractInteraction')}
               variant="outlined"
@@ -122,18 +122,19 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
           <Button
             color="primary"
             disabled={disableContractInteraction}
-            minHeight={52}
+            minHeight={42}
             minWidth={260}
             onClick={() => setActiveScreen('stakeFunds')}
             variant="outlined"
             testId="modal-stake-btn"
+            style={{ marginTop: '16px' }}
           >
             <Img
-              alt="Stake Safe Funds"
+              alt="Staking"
               className={classNames(classes.leftIcon, classes.iconSmall)}
               src={ContractInteractionIcon}
             />
-            Stake Safe Funds
+            Staking
           </Button>
         </Col>
       </Row>

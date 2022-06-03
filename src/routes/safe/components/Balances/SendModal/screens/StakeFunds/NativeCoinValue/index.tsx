@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 import Field from 'src/components/forms/Field'
 import TextField from 'src/components/forms/TextField'
-import { composeValidators, maxValue, mustBeFloat } from 'src/components/forms/validator'
+import {composeValidators, maxValue, minValue, mustBeFloat} from 'src/components/forms/validator'
 import ButtonLink from 'src/components/layout/ButtonLink'
 import Col from 'src/components/layout/Col'
 import Paragraph from 'src/components/layout/Paragraph'
@@ -64,7 +64,7 @@ export const NativeCoinValue = ({ onSetMax }: NativeCoinValueProps): React.React
             placeholder="Value"
             text="Value"
             type="text"
-            validate={!disabled && composeValidators(mustBeFloat, maxValue(ethBalance))}
+            validate={!disabled && composeValidators(mustBeFloat, minValue(100))} // !disabled && composeValidators(mustBeFloat, maxValue(ethBalance))
           />
         </Col>
       </Row>

@@ -6,22 +6,20 @@ import GnoForm from 'src/components/forms/GnoForm'
 import Block from 'src/components/layout/Block'
 import Hairline from 'src/components/layout/Hairline'
 import SafeInfo from 'src/routes/safe/components/Balances/SendModal/SafeInfo'
-import {safeParamAddressFromStateSelector, safeSelector} from 'src/logic/safe/store/selectors'
+import { safeParamAddressFromStateSelector } from 'src/logic/safe/store/selectors'
 import Buttons from './Buttons'
-import ContractABI from './ContractABI'
 import { EthAddressInput } from './EthAddressInput'
 import FormDivisor from './FormDivisor'
 import FormErrorMessage from './FormErrorMessage'
 import Header from './Header'
-import MethodsDropdown from './MethodsDropdown'
-import RenderInputParams from './RenderInputParams'
 import RenderOutputParams from './RenderOutputParams'
 import { createTxObject, formMutators, handleSubmitError, isReadMethod, ensResolver } from './utils'
 import { TransactionReviewType } from './Review'
 import { NativeCoinValue } from './NativeCoinValue'
-import DelegateAbi from './DelegateABI.json'
+import StakingAbi from './StakingABI.json'
 import { extractUsefulMethods } from 'src/logic/contractInteraction/sources/ABIService'
 import { AbiItem } from 'web3-utils'
+import MethodsDropdown from './MethodsDropdown'
 
 const useStyles = makeStyles(styles)
 
@@ -58,23 +56,25 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
 
   React.useMemo(() => {
     initialValues.contractAddress = '0x00000000000000000000000000000000000000FC'
-    const methods = extractUsefulMethods(DelegateAbi as AbiItem[])
+    const methods = extractUsefulMethods(StakingAbi as AbiItem[])
     initialValues.selectedMethod = methods[0]
-    initialValues.abi = JSON.stringify(DelegateAbi)
+    initialValues.abi = JSON.stringify(StakingAbi)
   }, [])
 
   const handleSubmit = async (
     { contractAddress, validatorAddress, selectedMethod, value, ...values },
     submit = true,
   ): Promise<void | any> => {
-    if (value && contractAddress && validatorAddress && selectedMethod) {
+    if (value || (contractAddress && validatorAddress && selectedMethod)) {
       try {
-        const valueDecimals = (value * Math.pow(10, 18)).toString()
+        const { signatureHash } = selectedMethod
+        const valueDecimals = value ? (value * Math.pow(10, 18)).toString() : '0'
+        console.log('valueDecimals', valueDecimals, value)
         const formValues = {
           ...values,
-          'methodInput-0x510b11bb3f3c799b11307c01ab7db0d335683ef5b2da98f7697de744f465eacc_0_address': safeAddress,
-          'methodInput-0x510b11bb3f3c799b11307c01ab7db0d335683ef5b2da98f7697de744f465eacc_1_address': validatorAddress,
-          'methodInput-0x510b11bb3f3c799b11307c01ab7db0d335683ef5b2da98f7697de744f465eacc_2_uint256': valueDecimals,
+          [`methodInput-${signatureHash}_0_address`]: safeAddress,
+          [`methodInput-${signatureHash}_1_address`]: validatorAddress,
+          [`methodInput-${signatureHash}_2_uint256`]: valueDecimals,
         }
         const txObject = createTxObject(selectedMethod, contractAddress, formValues)
         const data = txObject.encodeABI()
@@ -107,17 +107,21 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
       >
         {(submitting, validating, rest, mutators) => {
           setCallResults = mutators.setCallResults
+          const { values } = rest
           return (
             <>
               <Block className={classes.formContainer}>
                 <SafeInfo />
                 <FormDivisor />
+                <MethodsDropdown onChange={mutators.setSelectedMethod} />
                 <EthAddressInput
                   name="validatorAddress"
                   onScannedValue={mutators.setValidatorAddress}
-                  text="Validator Address*"
+                  text="Validator Address"
                 />
-                <NativeCoinValue onSetMax={mutators.setMax} />
+                {values && values.selectedMethod && values.selectedMethod.name !== 'CollectRewards' && (
+                  <NativeCoinValue onSetMax={mutators.setMax} />
+                )}
                 <RenderOutputParams />
                 <FormErrorMessage />
               </Block>

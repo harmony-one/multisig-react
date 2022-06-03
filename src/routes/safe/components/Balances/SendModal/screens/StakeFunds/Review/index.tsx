@@ -42,7 +42,7 @@ type Props = {
 
 const { nativeCoin } = getNetworkInfo()
 
-const ContractInteractionReview = ({ onClose, onPrev, tx }: Props): React.ReactElement => {
+const StakeFundsReview = ({ onClose, onPrev, tx }: Props): React.ReactElement => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const safeAddress = useSelector(safeParamAddressFromStateSelector)
@@ -91,7 +91,7 @@ const ContractInteractionReview = ({ onClose, onPrev, tx }: Props): React.ReactE
 
   return (
     <>
-      <Header onClose={onClose} subTitle="2 of 2" title="Contract Interaction" />
+      <Header onClose={onClose} subTitle="2 of 2" title="Stake Funds" />
       <Hairline />
       <Block className={classes.formContainer}>
         <Row margin="xs">
@@ -192,4 +192,4 @@ const ContractInteractionReview = ({ onClose, onPrev, tx }: Props): React.ReactE
   )
 }
 
-export default ContractInteractionReview
+export default StakeFundsReview
