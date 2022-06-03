@@ -19,7 +19,7 @@ import Collectible from '../assets/collectibles.svg'
 import Token from '../assets/token.svg'
 import { FEATURES } from 'src/config/networks/network.d'
 
-type ActiveScreen = 'sendFunds' | 'sendCollectible' | 'contractInteraction'
+type ActiveScreen = 'sendFunds' | 'sendCollectible' | 'contractInteraction' | 'stakeFunds'
 
 interface ChooseTxTypeProps {
   onClose: () => void
@@ -74,7 +74,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
           <Button
             className={classes.firstButton}
             color="primary"
-            minHeight={52}
+            minHeight={42}
             minWidth={260}
             onClick={() => setActiveScreen('sendFunds')}
             variant="contained"
@@ -87,7 +87,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
             <Button
               className={classes.firstButton}
               color="primary"
-              minHeight={52}
+              minHeight={42}
               minWidth={260}
               onClick={() => setActiveScreen('sendCollectible')}
               variant="contained"
@@ -105,7 +105,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
             <Button
               color="primary"
               disabled={disableContractInteraction}
-              minHeight={52}
+              minHeight={42}
               minWidth={260}
               onClick={() => setActiveScreen('contractInteraction')}
               variant="outlined"
@@ -119,6 +119,23 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
               Contract Interaction
             </Button>
           )}
+          <Button
+            color="primary"
+            disabled={disableContractInteraction}
+            minHeight={42}
+            minWidth={260}
+            onClick={() => setActiveScreen('stakeFunds')}
+            variant="outlined"
+            testId="modal-stake-btn"
+            style={{ marginTop: '16px' }}
+          >
+            <Img
+              alt="Staking"
+              className={classNames(classes.leftIcon, classes.iconSmall)}
+              src={ContractInteractionIcon}
+            />
+            Staking
+          </Button>
         </Col>
       </Row>
     </>

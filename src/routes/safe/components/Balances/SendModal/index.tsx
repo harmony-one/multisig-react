@@ -30,6 +30,10 @@ const SendCustomTx = lazy(() => import('./screens/ContractInteraction/SendCustom
 
 const ReviewCustomTx = lazy(() => import('./screens/ContractInteraction/ReviewCustomTx'))
 
+const StakeFunds = lazy(() => import('./screens/StakeFunds'))
+
+const StakeFundsReview: any = React.lazy(() => import('./screens/StakeFunds/Review'))
+
 const useStyles = makeStyles({
   scalableModalWindow: {
     height: 'auto',
@@ -84,6 +88,11 @@ const SendModal = ({
   const handleContractInteractionCreation = (contractInteractionInfo: any, submit: boolean): void => {
     setTx(contractInteractionInfo)
     if (submit) setActiveScreen('contractInteractionReview')
+  }
+
+  const handleStakeFundsCreation = (contractInteractionInfo: any, submit: boolean): void => {
+    setTx(contractInteractionInfo)
+    if (submit) setActiveScreen('stakeFundsReview')
   }
 
   const handleCustomTxCreation = (customTxInfo: any, submit: boolean): void => {
@@ -171,6 +180,19 @@ const SendModal = ({
             onPrev={() => setActiveScreen('sendCollectible')}
             tx={tx as CollectibleTx}
           />
+        )}
+        {activeScreen === 'stakeFunds' && isABI && (
+          <StakeFunds
+            isABI={isABI}
+            switchMethod={handleSwitchMethod}
+            contractAddress={recipientAddress}
+            initialValues={tx as ContractInteractionTx}
+            onClose={onClose}
+            onNext={handleStakeFundsCreation}
+          />
+        )}
+        {activeScreen === 'stakeFundsReview' && isABI && tx && (
+          <StakeFundsReview onClose={onClose} onPrev={() => setActiveScreen('stakeFunds')} tx={tx} />
         )}
       </Modal>
     </Suspense>
