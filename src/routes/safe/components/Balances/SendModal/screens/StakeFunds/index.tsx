@@ -8,7 +8,6 @@ import Hairline from 'src/components/layout/Hairline'
 import SafeInfo from 'src/routes/safe/components/Balances/SendModal/SafeInfo'
 import { safeParamAddressFromStateSelector } from 'src/logic/safe/store/selectors'
 import Buttons from './Buttons'
-import { EthAddressInput } from './EthAddressInput'
 import FormDivisor from './FormDivisor'
 import FormErrorMessage from './FormErrorMessage'
 import Header from './Header'
@@ -20,6 +19,7 @@ import StakingAbi from './StakingABI.json'
 import { extractUsefulMethods } from 'src/logic/contractInteraction/sources/ABIService'
 import { AbiItem } from 'web3-utils'
 import MethodsDropdown from './MethodsDropdown'
+import ValidatorsDropdown from './ValidatorsDropdown'
 
 const useStyles = makeStyles(styles)
 
@@ -113,11 +113,7 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
                 <SafeInfo />
                 <FormDivisor />
                 <MethodsDropdown onChange={mutators.setSelectedMethod} />
-                <EthAddressInput
-                  name="validatorAddress"
-                  onScannedValue={mutators.setValidatorAddress}
-                  text="Validator Address"
-                />
+                <ValidatorsDropdown onChange={mutators.setValidatorAddress} />
                 {values && values.selectedMethod && values.selectedMethod.name !== 'CollectRewards' && (
                   <NativeCoinValue onSetMax={mutators.setMax} />
                 )}

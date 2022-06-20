@@ -1,5 +1,6 @@
 import IconButton from '@material-ui/core/IconButton'
 import Close from '@material-ui/icons/Close'
+import AccountBalanceWallet from '@material-ui/icons/AccountBalanceWallet'
 import classNames from 'classnames/bind'
 import * as React from 'react'
 import { useSelector } from 'react-redux'
@@ -129,11 +130,7 @@ const ChooseTxType = ({ onClose, recipientAddress, setActiveScreen }: ChooseTxTy
             testId="modal-stake-btn"
             style={{ marginTop: '16px' }}
           >
-            <Img
-              alt="Staking"
-              className={classNames(classes.leftIcon, classes.iconSmall)}
-              src={ContractInteractionIcon}
-            />
+            <AccountBalanceWallet className={classNames(classes.leftIcon, classes.iconSmall)} />
             Staking
           </Button>
         </Col>
