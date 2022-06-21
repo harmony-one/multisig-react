@@ -13,10 +13,17 @@ const formatNumber = (n: BigNumber) => n.dividedBy(new BigNumber(10).pow(18)).to
 
 const StakingInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 8px;
   margin-left: 42px;
   font-size: 90%;
+  > div:not(:first-child) {
+    margin-left: 8px;
+  }
+`
+
+const Title = styled.span`
+  font-weight: bold;
 `
 
 const SafeInfo = () => {
@@ -36,15 +43,15 @@ const SafeInfo = () => {
           const { amount = 0, reward = 0, Undelegations } = item
           totalReward = totalReward.plus(new BigNumber(reward))
           totalAmount = totalAmount.plus(new BigNumber(amount))
-          totalUndelegated = Undelegations.reduce((acc, nextValue) => {
+          const undelegated = Undelegations.reduce((acc, nextValue) => {
             acc = acc.plus(new BigNumber(nextValue.Amount))
             return acc
           }, new BigNumber(0))
+          totalUndelegated = totalUndelegated.plus(undelegated)
         })
         setStakingReward(totalReward)
         setStakingAmount(totalAmount)
         setStakingUndelegated(totalUndelegated)
-        console.log('totalUndelegated', totalUndelegated)
       } catch (e) {
         console.error('Cannot load staking balance', e.message)
       }
@@ -57,9 +64,21 @@ const SafeInfo = () => {
     <div>
       <AddressInfo ethBalance={ethBalance} safeAddress={safeAddress} safeName={safeName} />
       <StakingInfoWrapper>
-        {<div>Staked: {formatNumber(stakingAmount)} ONE</div>}
-        {<div>Reward: {formatNumber(stakingReward)} ONE</div>}
-        {<div>Unstaked: {formatNumber(stakingUndelegated)} ONE</div>}
+        {
+          <div>
+            <Title>Staked</Title>: {formatNumber(stakingAmount)} ONE
+          </div>
+        }
+        {
+          <div>
+            <Title>Unstaked</Title>: {formatNumber(stakingUndelegated)} ONE
+          </div>
+        }
+        {
+          <div>
+            <Title>Reward</Title>: {parseFloat(formatNumber(stakingReward)).toFixed(2)} ONE
+          </div>
+        }
       </StakingInfoWrapper>
     </div>
   )

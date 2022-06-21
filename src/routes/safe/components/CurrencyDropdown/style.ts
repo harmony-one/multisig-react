@@ -36,7 +36,7 @@ export const useDropdownStyles = makeStyles({
     border: 'none',
     borderRadius: '3px',
     boxSizing: 'border-box',
-    color: '#5d6d74',
+    color: '#001428',
     cursor: 'pointer',
     fontSize: '12px',
     fontWeight: 'normal',
