@@ -115,7 +115,7 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
                 <FormDivisor />
                 <MethodsDropdown onChange={mutators.setSelectedMethod} />
                 <Link target="_blank" to={'https://staking.harmony.one/validators/mainnet'}>
-                  Open validators list
+                  Validators info
                 </Link>
                 <ValidatorsDropdown onChange={mutators.setValidatorAddress} />
                 {values && values.selectedMethod && values.selectedMethod.name !== 'CollectRewards' && (
