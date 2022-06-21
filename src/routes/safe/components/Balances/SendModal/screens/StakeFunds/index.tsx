@@ -5,6 +5,7 @@ import { styles } from './style'
 import GnoForm from 'src/components/forms/GnoForm'
 import Block from 'src/components/layout/Block'
 import Hairline from 'src/components/layout/Hairline'
+import Link from 'src/components/layout/Link'
 import SafeInfo from 'src/routes/safe/components/Balances/SendModal/SafeInfo'
 import { safeParamAddressFromStateSelector } from 'src/logic/safe/store/selectors'
 import Buttons from './Buttons'
@@ -113,6 +114,9 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
                 <SafeInfo />
                 <FormDivisor />
                 <MethodsDropdown onChange={mutators.setSelectedMethod} />
+                <Link target="_blank" to={'https://staking.harmony.one/validators/mainnet'}>
+                  Open validators list
+                </Link>
                 <ValidatorsDropdown onChange={mutators.setValidatorAddress} />
                 {values && values.selectedMethod && values.selectedMethod.name !== 'CollectRewards' && (
                   <NativeCoinValue onSetMax={mutators.setMax} />

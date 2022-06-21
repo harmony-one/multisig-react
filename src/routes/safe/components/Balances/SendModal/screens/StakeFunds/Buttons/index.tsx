@@ -5,7 +5,6 @@ import { useField, useFormState } from 'react-final-form'
 import Button from 'src/components/layout/Button'
 import Row from 'src/components/layout/Row'
 import { styles } from 'src/routes/safe/components/Balances/SendModal/screens/ContractInteraction/style'
-import { isReadMethod } from 'src/routes/safe/components/Balances/SendModal/screens/ContractInteraction/utils'
 
 const useStyles = makeStyles(styles)
 
@@ -16,8 +15,8 @@ export interface ButtonProps {
 const Buttons = ({ onClose }: ButtonProps) => {
   const classes = useStyles()
   const {
-    input: { value: method },
-  } = useField('selectedMethod', { subscription: { value: true } })
+    input: { value: validatorAddress },
+  } = useField('validatorAddress', { subscription: { value: true } })
   const { modifiedSinceLastSubmit, submitError, submitting, valid, validating } = useFormState({
     subscription: {
       modifiedSinceLastSubmit: true,
@@ -36,13 +35,14 @@ const Buttons = ({ onClose }: ButtonProps) => {
       <Button
         className={classes.submitButton}
         color="primary"
-        data-testid={`${isReadMethod(method) ? 'call' : 'review'}-tx-btn`}
-        disabled={submitting || validating || ((!valid || !!submitError) && !modifiedSinceLastSubmit) || !method}
+        disabled={
+          submitting || validating || ((!valid || !!submitError) && !modifiedSinceLastSubmit) || !validatorAddress
+        }
         minWidth={140}
         type="submit"
         variant="contained"
       >
-        {isReadMethod(method) ? 'Call' : 'Review'}
+        Review
       </Button>
     </Row>
   )

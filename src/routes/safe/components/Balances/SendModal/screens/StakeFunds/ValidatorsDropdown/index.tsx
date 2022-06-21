@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toChecksumAddress } from 'web3-utils'
 import InputBase from '@material-ui/core/InputBase'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -8,14 +9,12 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
-import { useField, useFormState } from 'react-final-form'
-
 import Col from 'src/components/layout/Col'
 import Row from 'src/components/layout/Row'
-import { NO_CONTRACT } from 'src/routes/safe/components/Balances/SendModal/screens/ContractInteraction/utils'
 import CheckIcon from 'src/routes/safe/components/CurrencyDropdown/img/check.svg'
 import { useDropdownStyles } from 'src/routes/safe/components/CurrencyDropdown/style'
 import { DropdownListTheme } from 'src/theme/mui'
+import { fromBech32 } from 'src/utils/bech32'
 
 const MENU_WIDTH = '452px'
 const StakingApiUrl = 'https://api.stake.hmny.io'
@@ -23,6 +22,7 @@ const StakingApiUrl = 'https://api.stake.hmny.io'
 interface ValidatorApiItem {
   active: boolean
   address: string
+  addressEth: string
   apr: number
   hasLogo: boolean
   name: string
@@ -54,13 +54,6 @@ const cutAddress = (address: string) => {
 
 const ValidatorsDropdown = ({ onChange }: MethodsDropdownProps): React.ReactElement | null => {
   const classes = useDropdownStyles({ buttonWidth: MENU_WIDTH })
-  const {
-    input: { value: abi },
-    meta: { valid },
-  } = useField('abi', { subscription: { value: true, valid: true } })
-  const {
-    initialValues: { selectedMethod: selectedMethodByDefault },
-  } = useFormState({ subscription: { initialValues: true } })
   const [selectedValidator, setSelectedValidator] = useState<ValidatorApiItem>()
   const [validatorsList, setValidatorsList] = useState<ValidatorApiItem[]>([])
   const [validatorsListFiltered, setValidatorsListFiltered] = useState<ValidatorApiItem[]>([])
@@ -78,6 +71,7 @@ const ValidatorsDropdown = ({ onChange }: MethodsDropdownProps): React.ReactElem
           .map((item) => {
             return {
               ...item,
+              addressEth: toChecksumAddress(fromBech32(item.address)),
               nameShort: cutString(item.name),
             }
           })
@@ -104,17 +98,17 @@ const ValidatorsDropdown = ({ onChange }: MethodsDropdownProps): React.ReactElem
     setAnchorEl(null)
   }
 
-  const onMethodSelectedChanged = (validator: ValidatorApiItem) => {
+  const onValidatorSelectedChanged = (validator: ValidatorApiItem) => {
     setSelectedValidator(validator)
-    onChange(validator.address)
+    onChange(validator.addressEth)
     handleClose()
   }
 
   const placeholder = selectedValidator
-    ? `${selectedValidator.nameShort} (${cutAddress(selectedValidator.address)})`
+    ? `${selectedValidator.nameShort} (${cutAddress(selectedValidator.addressEth)})`
     : 'Select validator'
 
-  return !valid || !abi || abi === NO_CONTRACT ? null : (
+  return (
     <Row margin="sm">
       <Col>
         <MuiThemeProvider theme={DropdownListTheme}>
@@ -164,19 +158,25 @@ const ValidatorsDropdown = ({ onChange }: MethodsDropdownProps): React.ReactElem
               </MenuItem>
               <div className={classes.dropdownItemsScrollWrapper}>
                 {validatorsListFiltered.map((validator) => {
-                  const { address, nameShort, apr, total_stake, identity } = validator
-                  const totalStakeShort = (BigInt(+total_stake) / BigInt(Math.pow(10, 18))).toString()
+                  const { addressEth, nameShort, apr, total_stake, identity } = validator
+                  const totalStakeShort = Number(
+                    (BigInt(+total_stake) / BigInt(Math.pow(10, 18))).toString(),
+                  ).toLocaleString()
 
                   return (
                     <MenuItem
                       className={classes.listItem}
                       key={identity}
-                      onClick={() => onMethodSelectedChanged(validator)}
+                      onClick={() => onValidatorSelectedChanged(validator)}
                       value={identity}
                     >
                       <ListItemText primary={nameShort} />
                       <ListItemIcon className={classes.iconRight}>
-                        {address === selectedValidator?.address ? <img alt="checked" src={CheckIcon} /> : <span />}
+                        {addressEth === selectedValidator?.addressEth ? (
+                          <img alt="checked" src={CheckIcon} />
+                        ) : (
+                          <span />
+                        )}
                       </ListItemIcon>
                       <ListItemIcon className={classes.iconRight}>
                         <ListItemText secondary={`${totalStakeShort} ONE`} />
