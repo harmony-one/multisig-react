@@ -11,6 +11,7 @@ import {
   Icon,
   Link as LinkSRC,
 } from '@gnosis.pm/safe-react-components'
+import StakingBanner from '../assets/staking_banner.png'
 
 import Link from 'src/components/layout/Link'
 import Block from 'src/components/layout/Block'
@@ -79,6 +80,10 @@ export const WelcomeLayout = ({ isOldMultisigMigration }: Props): React.ReactEle
       <Title size="md" strong>
         Welcome to Harmony Multisig Wallet.
       </Title>
+
+      <Wrapper>
+        <img src={StakingBanner} style={{ width: '50%', minWidth: '500px', borderRadius: '8px' }} />
+      </Wrapper>
 
       {/* Subtitle */}
       <Title size="xs">
