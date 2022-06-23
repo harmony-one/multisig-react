@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 import React from 'react'
+import { BigNumber } from 'bignumber.js'
 import { useSelector } from 'react-redux'
 import { styles } from './style'
 import GnoForm from 'src/components/forms/GnoForm'
@@ -69,7 +70,7 @@ const StakeFunds: React.FC<ContractInteractionProps> = ({ contractAddress, initi
     if (value || (contractAddress && validatorAddress && selectedMethod)) {
       try {
         const { signatureHash } = selectedMethod
-        const valueDecimals = value ? (value * Math.pow(10, 18)).toString() : '0'
+        const valueDecimals = value ? new BigNumber(value).multipliedBy(Math.pow(10, 18)).toString() : '0'
         const formValues = {
           ...values,
           [`methodInput-${signatureHash}_0_address`]: safeAddress,
