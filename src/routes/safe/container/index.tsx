@@ -2,6 +2,7 @@ import { GenericModal, Loader } from '@gnosis.pm/safe-react-components'
 import React, { useState, Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
+import StakingBanner from 'src/assets/icons/staking_banner.png'
 
 import { safeFeaturesEnabledSelector } from 'src/logic/safe/store/selectors'
 import { SAFELIST_ADDRESS } from 'src/routes/routes'
@@ -56,6 +57,7 @@ const Container = (): React.ReactElement => {
 
   return (
     <Suspense fallback={null}>
+      <img src={StakingBanner} style={{ width: '30%', minWidth: '300px', marginTop: '24px', borderRadius: '8px' }} />
       <Switch>
         <Route exact path={`${matchSafeWithAddress?.path}/balances/:assetType?`} component={Balances} />
         <Route exact path={`${matchSafeWithAddress?.path}/transactions`} component={TxsTable} />
