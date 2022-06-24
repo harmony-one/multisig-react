@@ -11,7 +11,7 @@ import {
   Icon,
   Link as LinkSRC,
 } from '@gnosis.pm/safe-react-components'
-import StakingBanner from '../assets/staking_banner.png'
+import StakingBanner from 'src/assets/icons/staking_banner.png'
 
 import Link from 'src/components/layout/Link'
 import Block from 'src/components/layout/Block'
