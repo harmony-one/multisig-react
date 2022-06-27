@@ -8,7 +8,7 @@ const baseConfig: EnvironmentSettings = {
     url: 'https://ethgasstation.info/json/ethgasAPI.json',
     gasParameter: 'average',
   },
-  rpcServiceUrl: 'https://api.s0.t.hmny.io',
+  rpcServiceUrl: 'https://a.api.s0.t.hmny.io',
   networkExplorerName: 'Harmony Explorer',
   networkExplorerUrl: 'https://explorer.harmony.one/#',
   networkExplorerApiUrl: 'https://api.etherscan.io/api',
