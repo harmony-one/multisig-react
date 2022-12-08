@@ -68,6 +68,19 @@ const StyledButtonLink = styled(ButtonLink)`
   margin: 16px 0 16px -8px;
 `
 
+const WarningBanner = styled(Wrapper)`
+  width: 750px;
+  flex-direction: column;
+  border: 2px solid red;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: white;
+
+  > p {
+    margin-bottom: 8px;
+  }
+`
+
 type Props = {
   isOldMultisigMigration?: boolean
 }
@@ -81,9 +94,28 @@ export const WelcomeLayout = ({ isOldMultisigMigration }: Props): React.ReactEle
         Welcome to Harmony Multisig Wallet.
       </Title>
 
-      <Wrapper>
-        <img src={StakingBanner} style={{ width: '50%', minWidth: '500px', borderRadius: '8px' }} />
-      </Wrapper>
+      <WarningBanner>
+        <Text size={'xl'}>
+          <b>Dear users!</b>
+        </Text>
+        <Text size={'xl'}>
+          <>Harmony Multisig Wallet is currently under maintenance due to a migration to the latest version.</>
+        </Text>
+        <Text size={'xl'}>
+          <>
+            All your wallets and funds are SAFE. In urgent case you can interact with your safes using our Staging
+            environment, which is already upgraded to the latest version -{' '}
+            <Link to={'https://staging-safe.harmony.one'}>https://staging-safe.harmony.one</Link>.
+          </>
+        </Text>
+        <Text size={'xl'}>
+          <>
+            Please keep in mind that all transactions that were created via Staging environment and are not executed -
+            will not appear on Production environment after upgrade, but will still be available on Staging environment,
+            and after execution will also appear on Production environment.
+          </>
+        </Text>
+      </WarningBanner>
 
       {/* Subtitle */}
       <Title size="xs">
